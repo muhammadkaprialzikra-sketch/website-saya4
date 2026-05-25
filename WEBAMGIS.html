@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab AMGIS - Teknik Pertanian dan Biosistem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        
+        /* Tema Teknologi Pertanian & Analisis Data */
+        .bg-theme-1 { background-image: url('https://images.unsplash.com/photo-1586771107445-d3ca888129ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; background-attachment: fixed; }
+        .bg-theme-2 { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; }
+        .bg-theme-3 { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; }
+        .bg-theme-4 { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-blue-600 selection:text-white pb-16 xl:pb-0">
+
+    <nav class="bg-blue-700 text-white shadow-lg fixed w-full z-40 top-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="logo-amgis.png" onerror="this.src='https://ui-avatars.com/api/?name=AMGIS&background=fff&color=0056b3'" alt="Logo AMGIS" class="h-10 w-10 shrink-0 rounded-full object-cover border-2 border-white bg-white shadow-md">
+                    <span class="font-bold text-[10px] sm:text-xs md:text-sm tracking-wider uppercase leading-tight">
+                        Agricultural Management And <br class="block lg:hidden">
+                        Geographic Information System
+                    </span>
+                </div>
+                <div class="hidden xl:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#beranda" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Beranda</a>
+                        <a href="#berita" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Berita</a>
+                        <a href="#asisten" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Asisten</a>
+                        <a href="#akademik" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Akademik</a>
+                        <a href="#fasilitas" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Fasilitas</a>
+                        <a href="#galeri" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Galeri</a>
+                        <a href="#saran" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-800 transition-colors">Saran</a>
+                        <button onclick="bukaModalAdmin()" class="px-3 py-2 rounded-md text-sm font-medium bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors shadow-sm ml-2">Admin Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="xl:hidden fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-[0_-5px_15px_rgba(0,0,0,0.05)] z-40">
+        <div class="flex justify-around items-center h-16 text-[10px] sm:text-xs font-bold text-gray-500">
+            <a href="#beranda" class="flex flex-col items-center justify-center w-full h-full hover:text-blue-600 transition-colors">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                Beranda
+            </a>
+            <a href="#asisten" class="flex flex-col items-center justify-center w-full h-full hover:text-blue-600 transition-colors">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                Asisten
+            </a>
+            <a href="#akademik" class="flex flex-col items-center justify-center w-full h-full hover:text-blue-600 transition-colors">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Akademik
+            </a>
+            <a href="#fasilitas" class="flex flex-col items-center justify-center w-full h-full hover:text-blue-600 transition-colors relative">
+                <span class="absolute top-1 right-2 flex h-2.5 w-2.5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span></span>
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                Live PC
+            </a>
+            <button onclick="bukaModalAdmin()" class="flex flex-col items-center justify-center w-full h-full text-yellow-600 hover:text-yellow-700 transition-colors">
+                <svg class="w-5 h-5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Admin
+            </button>
+        </div>
+    </div>
+
+    <section id="beranda">
+        <div class="bg-theme-1 min-h-[90vh] flex items-center relative">
+            <div class="absolute inset-0 bg-blue-900 bg-opacity-60 mix-blend-multiply"></div>
+            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <div class="max-w-7xl mx-auto px-4 text-center relative z-10 w-full pt-16">
+                <div class="inline-block px-5 py-2 rounded-full border border-blue-400/50 bg-blue-900/40 backdrop-blur-sm text-blue-100 text-sm md:text-base font-bold tracking-widest uppercase mb-8 shadow-sm">
+                    Laboratorium Teknik Pertanian dan Biosistem
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-[4.5rem] font-black uppercase tracking-tighter mb-8 drop-shadow-2xl leading-[1.1] md:leading-[1.1]">
+                    <span class="block text-white mb-2 md:mb-3">Agricultural Management</span>
+                    <span class="block text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-blue-300 pb-2">And Geographic</span>
+                    <span class="block text-white">Information System</span>
+                </h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-2xl font-light text-gray-200 drop-shadow-md leading-relaxed">
+                    Pusat rekayasa komputasi, desain parametrik, dan analisis spasial untuk mendukung kedaulatan teknologi pertanian modern.
+                </p>
+                <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#berita" class="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white text-sm md:text-base font-bold rounded-lg shadow-lg transition-all transform hover:-translate-y-1">
+                        Papan Berita Lab
+                    </a>
+                    <a href="#fasilitas" class="w-full sm:w-auto px-8 py-3.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm md:text-base font-bold rounded-lg backdrop-blur-sm shadow-lg transition-all transform hover:-translate-y-1">
+                        Lihat Status PC Live
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="berita" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-blue-800">Papan Berita & Pengumuman</h2>
+                <p class="text-gray-500 mt-2">Informasi terhangat mengenai kegiatan operasional ruang laboratorium AMGIS.</p>
+            </div>
+            <div id="public-news-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </div>
+    </section>
+
+    <section id="asisten" class="py-16 bg-blue-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-blue-800">Tim Asisten Praktikum</h2>
+                <p class="text-gray-500 mt-2">Daftar pengurus dan asisten Laboratorium AMGIS.</p>
+            </div>
+
+            <div class="flex justify-center mb-12 relative group px-2">
+                <img src="asisten-amgis.jpg" onerror="this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80'" alt="Foto Bersama Asisten AMGIS" class="rounded-2xl shadow-xl w-full max-w-4xl object-cover border-4 border-white transform transition duration-500 hover:scale-[1.01]">
+                <div class="absolute inset-0 bg-blue-900 opacity-0 group-hover:opacity-10 transition-opacity rounded-2xl max-w-4xl mx-auto pointer-events-none"></div>
+            </div>
+
+            <div id="public-asisten-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto"></div>
+        </div>
+    </section>
+
+    <section id="akademik" class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-blue-800">Informasi Akademik</h2>
+                <p class="text-gray-500 mt-2">Daftar mata kuliah berjalan dan pusat unduhan berkas praktikum.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 rounded-xl shadow-md p-6 border-t-4 border-blue-600">
+                    <h3 class="text-xl font-bold text-blue-800 mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> 
+                        Mata Kuliah Berjalan
+                    </h3>
+                    <div id="public-mk-list" class="space-y-4"></div>
+                </div>
+                <div class="bg-gray-50 rounded-xl shadow-md p-6 border-t-4 border-green-600">
+                    <h3 class="text-xl font-bold text-green-800 mb-6 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg> 
+                        Pusat Unduhan
+                    </h3>
+                    <ul id="public-file-list" class="space-y-3"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="fasilitas" class="py-16 bg-blue-50 border-t border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-blue-800 mb-2 flex justify-center items-center">
+                Status Penggunaan PC (Live) 
+                <span class="ml-3 flex h-3 w-3 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                </span>
+            </h2>
+            <p class="text-gray-500 mb-8">Klik PC yang berwarna <b class="text-green-600">Hijau (Kosong)</b> untuk mengisi Log Kehadiran.</p>
+            <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+                <div class="mb-6 bg-gray-200 py-3 rounded text-center text-sm font-bold text-gray-700 tracking-widest shadow-inner">MEJA INSTRUKTUR / PROYEKTOR</div>
+                <div id="public-grid-pc" class="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 gap-3"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeri" class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-blue-800">Galeri & Dokumentasi Lab</h2>
+                <p class="text-gray-500 mt-2">Kumpulan momen dan kegiatan praktikum di Laboratorium AMGIS.</p>
+            </div>
+            <div id="public-gallery-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <section id="saran" class="py-16 bg-gray-100 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-2xl p-8 md:p-12 shadow-md border border-gray-100">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-blue-800">Kotak Kritik & Saran</h2>
+                    <p class="text-gray-600 mt-2">Bantu kami meningkatkan kualitas pelayanan praktikum. Masukan Anda sangat berharga bagi asisten dan pengurus Lab.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    <div class="mb-4">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Nama (Opsional)</label>
+                        <input type="text" id="saran-nama" placeholder="Boleh dikosongkan jika ingin anonim" class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Pesan / Masukan <span class="text-red-500">*</span></label>
+                        <textarea id="saran-pesan" rows="4" placeholder="Tuliskan kritik, saran, atau kendala Anda selama praktikum di sini..." class="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"></textarea>
+                    </div>
+                    <button onclick="kirimSaran()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-all shadow-md active:scale-95">
+                        Kirim Pesan ke Asisten
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm border-t border-gray-800">
+        <p class="mb-2 font-medium text-gray-300">Laboratorium AMGIS - Departemen Teknik Pertanian dan Biosistem</p>
+        <p>&copy; 2026. Hak Cipta Dilindungi.</p>
+        <p class="mt-4 text-xs opacity-60">Dirancang oleh: Muhammad Kapri Alzikra</p>
+    </footer>
+
+    <div id="modal-overlay" class="hidden fixed inset-0 bg-gray-900 bg-opacity-95 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        
+        <div id="admin-login-screen" class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm text-center relative">
+            <button onclick="tutupModalAdmin()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 font-bold text-2xl transition-colors">&times;</button>
+            <h2 class="text-2xl font-bold mb-2 text-blue-800">Login Admin AMGIS</h2>
+            <p class="text-xs text-gray-500 mb-6">Password sistem: <b>admin123</b></p>
+            <input type="password" id="admin-password" class="w-full border-2 border-gray-200 p-3 rounded-lg mb-4 focus:outline-none focus:border-blue-500 text-center" placeholder="Masukkan Password">
+            <button onclick="prosesLogin()" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition-all shadow-md active:scale-95">Masuk Dashboard</button>
+        </div>
+
+        <div id="admin-dashboard-screen" class="hidden bg-gray-100 rounded-xl shadow-2xl w-full max-w-7xl max-h-[95vh] overflow-hidden flex flex-col relative border border-gray-300">
+            <nav class="bg-gray-900 text-white p-4 flex justify-between items-center shrink-0">
+                <span class="font-bold tracking-widest text-yellow-400 flex items-center">AMGIS ADMIN DASHBOARD</span>
+                <button onclick="prosesLogout()" class="bg-red-600 px-4 py-1.5 rounded text-sm font-bold hover:bg-red-700 transition-colors">Logout & Tutup</button>
+            </nav>
+
+            <div class="p-6 overflow-y-auto custom-scrollbar">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-orange-500 flex flex-col">
+                        <h3 class="font-bold text-lg mb-4 text-gray-700">Manajemen Berita</h3>
+                        <input type="text" id="news-title" placeholder="Judul Pengumuman" class="w-full border p-2 rounded mb-2 text-sm bg-gray-50">
+                        <textarea id="news-content" placeholder="Isi detail pengumuman..." rows="2" class="w-full border p-2 rounded mb-3 text-sm bg-gray-50"></textarea>
+                        <button onclick="tambahBerita()" class="w-full bg-orange-500 text-white py-2 rounded text-sm font-bold hover:bg-orange-600 transition-all mb-4">Publish Berita</button>
+                        <div class="mt-auto border-t pt-2 max-h-40 overflow-y-auto custom-scrollbar pr-2">
+                            <h4 class="text-xs font-semibold text-gray-500 mb-2">Daftar Berita (Hapus):</h4>
+                            <div id="admin-news-list" class="space-y-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-indigo-500 flex flex-col">
+                        <h3 class="font-bold text-lg mb-4 text-gray-700">Manajemen Asisten</h3>
+                        <div class="flex gap-2 mb-2">
+                            <input type="text" id="ast-nama" placeholder="Nama Lengkap" class="w-2/3 border p-2 rounded text-sm bg-gray-50">
+                            <input type="text" id="ast-no" placeholder="No/NIM (Angka)" class="w-1/3 border p-2 rounded text-sm bg-gray-50">
+                        </div>
+                        <input type="text" id="ast-jabatan" placeholder="Jabatan (Contoh: Asisten Praktikum)" value="Asisten Praktikum" class="w-full border p-2 rounded mb-3 text-sm bg-gray-50 text-gray-500">
+                        <button onclick="tambahAsisten()" class="w-full bg-indigo-500 text-white py-2 rounded text-sm font-bold hover:bg-indigo-600 transition-all mb-4">Tambahkan Asisten</button>
+                        <div class="mt-auto border-t pt-2 max-h-40 overflow-y-auto custom-scrollbar pr-2">
+                            <h4 class="text-xs font-semibold text-gray-500 mb-2">Daftar Asisten (Otomatis diurutkan No/NIM):</h4>
+                            <div id="admin-asisten-list" class="space-y-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500 flex flex-col">
+                        <h3 class="font-bold text-lg mb-4 text-gray-700">Manajemen Mata Kuliah</h3>
+                        <input type="text" id="mk-nama" placeholder="Nama Mata Kuliah" class="w-full border p-2 rounded mb-2 text-sm bg-gray-50">
+                        <input type="text" id="mk-jadwal" placeholder="Jadwal (Cth: Senin, 08:00)" class="w-full border p-2 rounded mb-3 text-sm bg-gray-50">
+                        <button onclick="tambahMK()" class="w-full bg-blue-500 text-white py-2 rounded text-sm font-bold hover:bg-blue-600 transition-all mb-4">Tambahkan Jadwal Baru</button>
+                        <div class="mt-auto border-t pt-2 max-h-32 overflow-y-auto custom-scrollbar pr-2">
+                            <h4 class="text-xs font-semibold text-gray-500 mb-2">Jadwal Aktif:</h4>
+                            <div id="admin-mk-list" class="space-y-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500 flex flex-col">
+                        <h3 class="font-bold text-lg mb-4 text-gray-700">Manajemen Pusat Unduhan</h3>
+                        <input type="text" id="file-nama" placeholder="Nama Dokumen/File" class="w-full border p-2 rounded mb-2 text-sm bg-gray-50">
+                        <input type="text" id="file-link" placeholder="Link GDrive atau URL File" class="w-full border p-2 rounded mb-3 text-sm bg-gray-50">
+                        <button onclick="tambahFile()" class="w-full bg-green-500 text-white py-2 rounded text-sm font-bold hover:bg-green-600 transition-all mb-4">Tambahkan Link Baru</button>
+                        <div class="mt-auto border-t pt-2 max-h-32 overflow-y-auto custom-scrollbar pr-2">
+                            <h4 class="text-xs font-semibold text-gray-500 mb-2">File Aktif:</h4>
+                            <div id="admin-file-list" class="space-y-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-purple-500">
+                        <h3 class="font-bold text-lg mb-2 text-gray-700">Upload Foto Galeri</h3>
+                        <input type="file" id="foto-file" accept="image/*" class="w-full border text-sm mb-2 p-1">
+                        <input type="text" id="foto-caption" placeholder="Keterangan foto" class="w-full border p-2 rounded mb-3 text-sm bg-gray-50">
+                        <button onclick="uploadFoto()" id="btn-upload-foto" class="w-full bg-purple-600 text-white py-2 rounded text-sm font-bold hover:bg-purple-700 shadow-sm">Unggah Foto</button>
+                        <div class="mt-4 border-t pt-2">
+                            <h4 class="text-xs font-semibold text-gray-500 mb-2">Foto Disimpan:</h4>
+                            <div id="admin-gallery-list" class="flex overflow-x-auto gap-2 pb-2 custom-scrollbar"></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-500 col-span-1 lg:col-span-2 flex flex-col">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg text-gray-700">Pengguna PC Live</h3>
+                            <button onclick="resetPC()" class="bg-red-500 text-white px-3 py-1.5 rounded text-xs font-bold hover:bg-red-600 transition-colors shadow">Reset / Kosongkan Semua PC</button>
+                        </div>
+                        <div id="admin-pc-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-48 overflow-y-auto custom-scrollbar pr-2"></div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow border-l-4 border-teal-500">
+                    <h3 class="font-bold text-lg mb-4 text-gray-700 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Kotak Masuk Kritik & Saran
+                    </h3>
+                    <div id="admin-saran-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-h-60 overflow-y-auto custom-scrollbar p-2 bg-gray-50 rounded-lg"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ====================================================================
+           1. INISIALISASI DATABASE LOKAL BROWSER
+           ==================================================================== */
+        function initDB() {
+            if(!localStorage.getItem('amgis_courses')) localStorage.setItem('amgis_courses', JSON.stringify([{ nama: "Pemrograman Komputer", jadwal: "Senin, 08:00 - 10:30 WIB" }]));
+            if(!localStorage.getItem('amgis_files')) localStorage.setItem('amgis_files', JSON.stringify([{ nama: "FORMAT LAPORAN AMGIS (.docx)", link: "#" }]));
+            if(!localStorage.getItem('amgis_pcs')) localStorage.setItem('amgis_pcs', JSON.stringify(Array(30).fill({ status: 'kosong', user: '' })));
+            if(!localStorage.getItem('amgis_gallery')) localStorage.setItem('amgis_gallery', JSON.stringify([]));
+            if(!localStorage.getItem('amgis_feedback')) localStorage.setItem('amgis_feedback', JSON.stringify([]));
+            if(!localStorage.getItem('amgis_news')) {
+                localStorage.setItem('amgis_news', JSON.stringify([{ judul: "Pelaksanaan Responsi Objek III Statistika", isi: "Diberitahukan kepada seluruh praktikan Statistika I, pelaksanaan responsi dilaksanakan minggu depan.", tanggal: "25 Mei 2026" }]));
+            }
+            if(!localStorage.getItem('amgis_assistants')) {
+                localStorage.setItem('amgis_assistants', JSON.stringify([
+                    { nama: "Abdillah Fathah Gunawan", no: "90/AMGIS/2025", jabatan: "Asisten Praktikum" },
+                    { nama: "Dwinta Amanda", no: "91/AMGIS/2025", jabatan: "Asisten Praktikum" },
+                    { nama: "Ferdi Putra Nugraha", no: "92/AMGIS/2025", jabatan: "Asisten Praktikum" },
+                    { nama: "M. M. Fathurrahaman S.", no: "93/AMGIS/2025", jabatan: "Asisten Praktikum" },
+                    { nama: "Muhammad Kapri Alzikra", no: "94/AMGIS/2025", jabatan: "Asisten Praktikum" },
+                    { nama: "Febriani Jaya Lawolo", no: "95/AMGIS/2025", jabatan: "Asisten Praktikum" }
+                ]));
+            }
+        }
+        initDB();
+
+        /* ====================================================================
+           2. FUNGSI RENDER (PUBLIK - READ ONLY)
+           ==================================================================== */
+        function renderPublicAll() {
+            const news = JSON.parse(localStorage.getItem('amgis_news'));
+            const pNews = document.getElementById('public-news-list');
+            pNews.innerHTML = news.length === 0 ? '<p class="text-sm text-gray-400 italic">Belum ada pengumuman.</p>' : '';
+            news.forEach(n => {
+                pNews.innerHTML += `
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-0.5 rounded-full">Info Lab</span>
+                            <span class="text-xs text-gray-400">${n.tanggal}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">${n.judul}</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">${n.isi}</p>
+                    </div>`;
+            });
+
+            let asisten = JSON.parse(localStorage.getItem('amgis_assistants'));
+            asisten.sort((a, b) => a.no.localeCompare(b.no)); // Sort NIM Ascending
+            const pAst = document.getElementById('public-asisten-list');
+            pAst.innerHTML = asisten.length === 0 ? '<p class="text-sm text-gray-400 italic text-center col-span-full">Belum ada asisten terdaftar.</p>' : '';
+            asisten.forEach(a => {
+                pAst.innerHTML += `
+                    <div class="bg-white rounded-lg shadow-sm p-6 text-center border-t-4 border-indigo-500 hover:shadow-md transition-shadow">
+                        <h3 class="text-lg font-bold text-gray-900">${a.nama}</h3>
+                        <p class="text-xs text-gray-500 mt-1">${a.no}</p>
+                        <p class="mt-3 inline-block px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-semibold rounded-full">${a.jabatan}</p>
+                    </div>`;
+            });
+
+            const courses = JSON.parse(localStorage.getItem('amgis_courses'));
+            const files = JSON.parse(localStorage.getItem('amgis_files'));
+            const pMk = document.getElementById('public-mk-list');
+            pMk.innerHTML = courses.length === 0 ? '<p class="text-sm text-gray-400 italic">Kosong.</p>' : '';
+            courses.forEach(c => pMk.innerHTML += `<div class="p-4 bg-white border border-blue-100 rounded-lg shadow-sm"><h4 class="font-bold text-blue-900">${c.nama}</h4><p class="text-sm text-blue-700 mt-1 font-medium">Jadwal: ${c.jadwal}</p></div>`);
+            
+            const pFile = document.getElementById('public-file-list');
+            pFile.innerHTML = files.length === 0 ? '<p class="text-sm text-gray-400 italic">Kosong.</p>' : '';
+            files.forEach(f => pFile.innerHTML += `<li><a href="${f.link}" target="_blank" class="flex justify-between items-center p-3 bg-white border border-green-100 rounded-lg hover:border-green-400 transition-all shadow-sm"><span class="font-semibold text-gray-700 text-sm">${f.nama}</span><span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded font-bold uppercase">UNDUH</span></a></li>`);
+
+            const gallery = JSON.parse(localStorage.getItem('amgis_gallery'));
+            const pGal = document.getElementById('public-gallery-list');
+            pGal.innerHTML = gallery.length === 0 ? '<p class="text-sm text-gray-500 italic col-span-full text-center">Belum ada foto.</p>' : '';
+            gallery.forEach(item => {
+                pGal.innerHTML += `<div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-md transition-shadow"><img src="${item.image}" class="w-full h-48 object-cover">${item.caption ? `<div class="p-4 border-t border-gray-50"><p class="text-xs font-medium text-gray-600 text-center">${item.caption}</p></div>` : ''}</div>`;
+            });
+
+            const pcs = JSON.parse(localStorage.getItem('amgis_pcs'));
+            const pGrid = document.getElementById('public-grid-pc');
+            pGrid.innerHTML = '';
+            pcs.forEach((pc, index) => {
+                const isKosong = pc.status === 'kosong';
+                const labelNo = (index + 1).toString().padStart(2, '0');
+                const btnClass = isKosong ? "bg-green-50 text-green-800 border-green-400 hover:bg-green-100 cursor-pointer shadow-sm hover:shadow transform hover:-translate-y-0.5" : "bg-red-50 text-red-800 border-red-400 cursor-not-allowed opacity-90";
+                pGrid.innerHTML += `<div onclick="isiPC(${index})" class="border-2 rounded-lg p-3 text-center transition-all duration-200 ${btnClass}"><div class="font-extrabold text-lg">PC ${labelNo}</div><div class="text-[10px] md:text-xs truncate font-bold mt-1 uppercase ${isKosong ? 'text-green-600' : 'text-red-600'}">${isKosong ? 'Tersedia' : pc.user}</div></div>`;
+            });
+        }
+
+        /* ====================================================================
+           3. FUNGSI RENDER (ADMIN - FULL ACCESS)
+           ==================================================================== */
+        function renderAdminAll() {
+            const news = JSON.parse(localStorage.getItem('amgis_news'));
+            const aNews = document.getElementById('admin-news-list');
+            aNews.innerHTML = news.length === 0 ? '<p class="text-xs text-gray-400 italic">Kosong.</p>' : '';
+            news.forEach((n, idx) => aNews.innerHTML += `<div class="flex justify-between items-start text-xs py-2 border-b border-gray-100"><div class="pr-2"><p class="font-bold text-gray-700">${n.judul}</p><p class="text-[10px] text-gray-400">${n.tanggal}</p></div><button onclick="hapusBerita(${idx})" class="text-red-400 hover:text-red-600 font-bold bg-red-50 px-2 py-1 rounded">Hapus</button></div>`);
+
+            let asisten = JSON.parse(localStorage.getItem('amgis_assistants'));
+            asisten.sort((a, b) => a.no.localeCompare(b.no));
+            const aAst = document.getElementById('admin-asisten-list');
+            aAst.innerHTML = asisten.length === 0 ? '<p class="text-xs text-gray-400 italic">Kosong.</p>' : '';
+            asisten.forEach((a, idx) => aAst.innerHTML += `<div class="flex justify-between items-center text-xs py-1.5 border-b border-gray-100"><div class="truncate pr-2"><span class="font-medium text-gray-800">${a.nama}</span> <span class="text-gray-400">(${a.no})</span></div><button onclick="hapusAsisten(${idx})" class="text-red-400 hover:text-red-600 font-bold px-2 py-0.5 rounded hover:bg-red-50">&times;</button></div>`);
+
+            const courses = JSON.parse(localStorage.getItem('amgis_courses'));
+            const aMk = document.getElementById('admin-mk-list');
+            aMk.innerHTML = courses.length === 0 ? '<p class="text-xs text-gray-400 italic">Kosong.</p>' : '';
+            courses.forEach((c, idx) => aMk.innerHTML += `<div class="flex justify-between items-center text-xs py-1.5 border-b border-gray-100"><span class="truncate pr-2 font-medium text-gray-700">${c.nama}</span><button onclick="hapusMK(${idx})" class="text-red-400 hover:text-red-600 font-bold px-2 py-0.5 rounded hover:bg-red-50">&times;</button></div>`);
+            
+            const files = JSON.parse(localStorage.getItem('amgis_files'));
+            const aFile = document.getElementById('admin-file-list');
+            aFile.innerHTML = files.length === 0 ? '<p class="text-xs text-gray-400 italic">Kosong.</p>' : '';
+            files.forEach((f, idx) => aFile.innerHTML += `<div class="flex justify-between items-center text-xs py-1.5 border-b border-gray-100"><span class="truncate pr-2 font-medium text-gray-700">${f.nama}</span><button onclick="hapusFile(${idx})" class="text-red-400 hover:text-red-600 font-bold px-2 py-0.5 rounded hover:bg-red-50">&times;</button></div>`);
+
+            const gallery = JSON.parse(localStorage.getItem('amgis_gallery'));
+            const aGal = document.getElementById('admin-gallery-list');
+            aGal.innerHTML = gallery.length === 0 ? '<p class="text-xs text-gray-400 italic">Kosong</p>' : '';
+            gallery.forEach((item, idx) => aGal.innerHTML += `<div class="relative shrink-0 w-16"><img src="${item.image}" class="w-16 h-16 object-cover rounded border border-gray-200"><button onclick="hapusFoto(${idx})" class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] shadow hover:bg-red-600">&times;</button></div>`);
+
+            const pcs = JSON.parse(localStorage.getItem('amgis_pcs'));
+            const aPc = document.getElementById('admin-pc-list');
+            aPc.innerHTML = ''; let countPc = 0;
+            pcs.forEach((pc, idx) => {
+                if(pc.status === 'terisi') {
+                    const labelNo = (idx + 1).toString().padStart(2, '0');
+                    aPc.innerHTML += `<div class="bg-yellow-50 border border-yellow-300 p-2 rounded-lg flex justify-between items-center shadow-sm"><div class="truncate"><span class="font-black text-yellow-900 text-xs">PC ${labelNo}</span><p class="text-[11px] text-gray-800 font-medium truncate uppercase">${pc.user}</p></div><button onclick="bebaskanPC(${idx})" class="text-red-500 font-bold text-sm hover:text-red-700 px-1">&times;</button></div>`;
+                    countPc++;
+                }
+            });
+            if(countPc === 0) aPc.innerHTML = '<p class="text-sm text-gray-500 italic col-span-full">Tidak ada PC aktif.</p>';
+
+            const feedback = JSON.parse(localStorage.getItem('amgis_feedback'));
+            const aSaran = document.getElementById('admin-saran-list');
+            aSaran.innerHTML = feedback.length === 0 ? '<p class="text-sm text-gray-500 italic col-span-full">Belum ada pesan yang masuk.</p>' : '';
+            feedback.forEach((f, idx) => {
+                aSaran.innerHTML += `
+                    <div class="bg-white border border-teal-100 rounded-lg p-4 shadow-sm flex flex-col justify-between relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-teal-400"></div>
+                        <div class="pl-2">
+                            <div class="flex justify-between items-start mb-2"><span class="font-bold text-teal-800 text-sm">${f.nama}</span><span class="text-[10px] text-gray-400">${f.tanggal}</span></div>
+                            <p class="text-xs text-gray-700 leading-relaxed italic">"${f.pesan}"</p>
+                        </div>
+                        <div class="mt-3 text-right border-t border-gray-50 pt-2"><button onclick="hapusSaran(${idx})" class="text-[10px] text-red-500 font-bold hover:underline bg-red-50 px-2 py-1 rounded">Tandai Selesai (Hapus)</button></div>
+                    </div>`;
+            });
+        }
+
+        /* ====================================================================
+           4. LOGIKA INTERAKSI & UPDATE
+           ==================================================================== */
+        function refreshViews() {
+            renderPublicAll();
+            if(!document.getElementById('admin-dashboard-screen').classList.contains('hidden')) { renderAdminAll(); }
+        }
+
+        function isiPC(index) {
+            let pcs = JSON.parse(localStorage.getItem('amgis_pcs'));
+            if(pcs[index].status === 'terisi') return alert("Maaf, PC ini sedang digunakan.");
+            window.open('https://docs.google.com/forms/d/e/1FAIpQLSe48Y_UhBHbGqxBW2YYMFzL2h8A_kqaKvILuXCoZjWoPd1JYA/viewform', '_blank');
+            setTimeout(() => {
+                const nama = prompt(`SINKRONISASI JADWAL LIVE PC ${index + 1}\n\nKetikkan Nama atau NIM Anda kembali di bawah ini agar sistem mencatat Anda:`);
+                if(nama && nama.trim() !== "") {
+                    pcs[index] = { status: 'terisi', user: nama.trim() };
+                    localStorage.setItem('amgis_pcs', JSON.stringify(pcs));
+                    refreshViews();
+                }
+            }, 500);
+        }
+
+        function kirimSaran() {
+            const namaInput = document.getElementById('saran-nama').value.trim(), pesanInput = document.getElementById('saran-pesan').value.trim();
+            if(!pesanInput) return alert("Pesan tidak boleh kosong!");
+            let feedback = JSON.parse(localStorage.getItem('amgis_feedback'));
+            feedback.unshift({ nama: namaInput || 'Anonim', pesan: pesanInput, tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }) });
+            localStorage.setItem('amgis_feedback', JSON.stringify(feedback));
+            document.getElementById('saran-nama').value = ''; document.getElementById('saran-pesan').value = '';
+            alert("Pesan terkirim. Terima kasih!"); refreshViews();
+        }
+
+        function tambahBerita() {
+            const judul = document.getElementById('news-title').value.trim(), isi = document.getElementById('news-content').value.trim();
+            if(!judul || !isi) return alert("Lengkapi form berita!");
+            let news = JSON.parse(localStorage.getItem('amgis_news'));
+            news.unshift({ judul, isi, tanggal: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) });
+            localStorage.setItem('amgis_news', JSON.stringify(news));
+            document.getElementById('news-title').value = ''; document.getElementById('news-content').value = '';
+            refreshViews(); alert("Berita dipublikasikan!");
+        }
+        function hapusBerita(idx) { let news = JSON.parse(localStorage.getItem('amgis_news')); news.splice(idx, 1); localStorage.setItem('amgis_news', JSON.stringify(news)); refreshViews(); }
+
+        function tambahAsisten() {
+            const nama = document.getElementById('ast-nama').value.trim(), no = document.getElementById('ast-no').value.trim(), jabatan = document.getElementById('ast-jabatan').value.trim();
+            if(!nama || !no) return alert("Nama dan No/NIM wajib diisi!");
+            let ast = JSON.parse(localStorage.getItem('amgis_assistants'));
+            ast.push({ nama, no, jabatan: jabatan || "Asisten Praktikum" });
+            localStorage.setItem('amgis_assistants', JSON.stringify(ast));
+            document.getElementById('ast-nama').value = ''; document.getElementById('ast-no').value = ''; refreshViews(); alert("Asisten ditambahkan!");
+        }
+        function hapusAsisten(idx) {
+            if(confirm("Hapus asisten ini?")) {
+                let ast = JSON.parse(localStorage.getItem('amgis_assistants'));
+                ast.sort((a, b) => a.no.localeCompare(b.no)); ast.splice(idx, 1);
+                localStorage.setItem('amgis_assistants', JSON.stringify(ast)); refreshViews();
+            }
+        }
+
+        function tambahMK() {
+            const nama = document.getElementById('mk-nama').value.trim(), jadwal = document.getElementById('mk-jadwal').value.trim();
+            if(!nama || !jadwal) return alert("Lengkapi jadwal!");
+            let mk = JSON.parse(localStorage.getItem('amgis_courses')); mk.push({ nama, jadwal });
+            localStorage.setItem('amgis_courses', JSON.stringify(mk));
+            document.getElementById('mk-nama').value = ''; document.getElementById('mk-jadwal').value = ''; refreshViews();
+        }
+        function hapusMK(idx) { let mk = JSON.parse(localStorage.getItem('amgis_courses')); mk.splice(idx, 1); localStorage.setItem('amgis_courses', JSON.stringify(mk)); refreshViews(); }
+
+        function tambahFile() {
+            const nama = document.getElementById('file-nama').value.trim(), link = document.getElementById('file-link').value.trim();
+            if(!nama || !link) return alert("Lengkapi link!");
+            let file = JSON.parse(localStorage.getItem('amgis_files')); file.push({ nama, link });
+            localStorage.setItem('amgis_files', JSON.stringify(file));
+            document.getElementById('file-nama').value = ''; document.getElementById('file-link').value = ''; refreshViews();
+        }
+        function hapusFile(idx) { let file = JSON.parse(localStorage.getItem('amgis_files')); file.splice(idx, 1); localStorage.setItem('amgis_files', JSON.stringify(file)); refreshViews(); }
+
+        function bebaskanPC(idx) { let pcs = JSON.parse(localStorage.getItem('amgis_pcs')); pcs[idx] = { status: 'kosong', user: '' }; localStorage.setItem('amgis_pcs', JSON.stringify(pcs)); refreshViews(); }
+        function resetPC() { if(confirm("Kosongkan semua PC?")) { localStorage.setItem('amgis_pcs', JSON.stringify(Array(30).fill({ status: 'kosong', user: '' }))); refreshViews(); } }
+
+        function uploadFoto() {
+            const fInput = document.getElementById('foto-file'), cInput = document.getElementById('foto-caption'), file = fInput.files[0];
+            if (!file) return alert("Pilih foto!");
+            const btn = document.getElementById('btn-upload-foto'); btn.innerText = "Memproses...";
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas'); const MAX = 600;
+                    let w = img.width, h = img.height;
+                    if (w > MAX) { h *= MAX / w; w = MAX; }
+                    canvas.width = w; canvas.height = h;
+                    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                    try {
+                        let gal = JSON.parse(localStorage.getItem('amgis_gallery'));
+                        gal.unshift({ image: canvas.toDataURL('image/jpeg', 0.6), caption: cInput.value.trim() });
+                        localStorage.setItem('amgis_gallery', JSON.stringify(gal));
+                        fInput.value = ''; cInput.value = ''; refreshViews(); alert("Berhasil diunggah!");
+                    } catch(err) { alert("Memori Browser Penuh. Hapus foto lama."); }
+                    finally { btn.innerText = "Unggah Foto"; }
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+        function hapusFoto(idx) { if(confirm("Hapus foto?")) { let gal = JSON.parse(localStorage.getItem('amgis_gallery')); gal.splice(idx, 1); localStorage.setItem('amgis_gallery', JSON.stringify(gal)); refreshViews(); } }
+        function hapusSaran(idx) { let feed = JSON.parse(localStorage.getItem('amgis_feedback')); feed.splice(idx, 1); localStorage.setItem('amgis_feedback', JSON.stringify(feed)); refreshViews(); }
+
+        /* ====================================================================
+           5. CONTROLLER UI MODAL ADMIN
+           ==================================================================== */
+        function bukaModalAdmin() { document.getElementById('modal-overlay').classList.remove('hidden'); document.getElementById('admin-login-screen').classList.remove('hidden'); document.getElementById('admin-dashboard-screen').classList.add('hidden'); document.getElementById('admin-password').value = ''; document.body.style.overflow = 'hidden'; }
+        function tutupModalAdmin() { document.getElementById('modal-overlay').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        function prosesLogin() {
+            if(document.getElementById('admin-password').value === 'admin123') {
+                document.getElementById('admin-login-screen').classList.add('hidden');
+                document.getElementById('admin-dashboard-screen').classList.remove('hidden');
+                refreshViews();
+            } else { alert('Password Salah!'); }
+        }
+        function prosesLogout() { tutupModalAdmin(); alert('Logout berhasil.'); }
+
+        // Render perdana saat halaman dimuat
+        renderPublicAll();
+    </script>
+</body>
+</html>
